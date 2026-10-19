@@ -266,7 +266,7 @@ p{font-size:13px;line-height:1.9;color:#c8c5c5}
 <div id="toast" role="status"></div>
 
 <!-- AUDIO FILES: add music/welcome.mp3 and music/special.mp3 to your project folder -->
-<audio id="song" preload="metadata" src="welcome.mp3"></audio>
+<audio id="song" preload="metadata"loop src="welcome.mp3"></audio>
 
 <script>
 const pages=['home','wish','love','cakePage','letter','photos','music','finale']
@@ -357,7 +357,12 @@ function syncPlayer(){
 }
 function playTrack(src,name,autoPlay=false){
  if(activeTrack!==src){
-  activeTrack=src;audioReady=false;song.pause();song.src=src;song.load();
+  activeTrack=src;
+audioReady=false;
+song.pause();
+song.loop = src === 'music/welcome.mp3';
+song.src=src;
+song.load();
   $('trackName').textContent=name;$('elapsed').textContent='0:00';$('duration').textContent='0:00';seek.value=0;
  }
  $('musicHint').textContent='Loading song…';
